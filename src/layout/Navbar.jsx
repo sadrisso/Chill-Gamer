@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../auth/AuthProvider";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Navbar = () => {
@@ -19,7 +21,8 @@ const Navbar = () => {
         signOutUser()
             .then(() => {
                 console.log("Signed Out Successful")
-                navigate("/")
+                toast.success("Successfully Logged Out")
+                navigate("/login")
             })
             .catch((err) => {
                 console.log("ERR", err)
@@ -60,8 +63,14 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    {user && user?.email ? <button className="btn btn-error" onClick={handleLogOut}>Logout</button> :
-                        <Link to="/login"><a className="btn btn-warning">Login</a></Link>}
+                    {user && user?.email ?
+                        <div className="flex gap-1 md:gap-3 items-center">
+                            <img src={user?.photoURL} alt="" className="w-[40px] h-[40px] rounded-full" />
+                            <button className="btn btn-error" onClick={handleLogOut}>Logout</button>
+                        </div> :
+                        <div>
+                            <Link to="/login"><a className="btn btn-warning">Login</a></Link>
+                        </div>}
 
                 </div>
             </div>

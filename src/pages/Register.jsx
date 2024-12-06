@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Register = () => {
 
-    const { createUser } = useContext(AuthContext)
+    const { createUser, updateUser } = useContext(AuthContext)
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -19,8 +20,13 @@ const Register = () => {
 
         createUser(email, password)
             .then((res) => {
+                toast.success("Successfully Registered")
                 console.log("Registered", res.user)
                 form.reset()
+
+                updateUser({ displayName: name, photoURL: photo })
+                    .then(() => { console.log("Profile Updated") })
+                    .catch((err) => { console.log("ERR:", err) })
             })
             .catch((err) => {
                 console.log("ERR: ", err)

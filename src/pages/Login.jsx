@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
-
+    const navigate = useNavigate()
     const { signInUser } = useContext(AuthContext)
 
     const handleSubmit = e => {
@@ -18,8 +19,10 @@ const Login = () => {
 
         signInUser(email, password)
             .then((res) => {
+                toast.success("Successfully Logged In")
                 console.log("Signed In", res.user)
                 form.reset()
+                navigate("/")
             })
             .catch((err) => {
                 console.log("ERR: ", err)
