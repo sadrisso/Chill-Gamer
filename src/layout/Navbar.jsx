@@ -1,14 +1,30 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../auth/AuthProvider";
 
 
 const Navbar = () => {
 
+    const { user, signOutUser } = useContext(AuthContext)
+    const navigate = useNavigate()
+
     const links = <div className="flex gap-5">
         <Link to="/">Home</Link>
-        <Link to="/add-review">Review</Link>
-        <Link to="/my-review">My Review</Link>
+        <Link to="/add-review">Add Review</Link>
         <Link to="/watch-list">WatchList</Link>
+        <Link to="/my-review">My Review</Link>
     </div>
+
+    const handleLogOut = () => {
+        signOutUser()
+            .then(() => {
+                console.log("Signed Out Successful")
+                navigate("/")
+            })
+            .catch((err) => {
+                console.log("ERR", err)
+            })
+    }
 
 
     return (
@@ -44,7 +60,9 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Login</a>
+                    {user && user?.email ? <button className="btn btn-error" onClick={handleLogOut}>Logout</button> :
+                        <Link to="/login"><a className="btn btn-warning">Login</a></Link>}
+
                 </div>
             </div>
         </div>
