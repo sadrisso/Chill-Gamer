@@ -23,7 +23,6 @@ const AddReview = () => {
         const reviewInfo = { image, title, description, rating, year }
 
 
-        //this form data will post to the server soon
 
         fetch("http://localhost:9000/reviews", {
             method: "POST",
