@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../auth/AuthProvider";
+import { toast } from "react-toastify";
 
 
 const AddReview = () => {
@@ -9,6 +10,31 @@ const AddReview = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        toast.success("Review Data Submited")
+
+        const form = e.target;
+        const image = form.image.value;
+        const title = form.title.value;
+        const description = form.description.value;
+        const rating = form.rating.value;
+        const year = form.year.value;
+
+        const reviewInfo = { image, title, description, rating, year }
+
+
+        //this form data will post to the server soon
+
+        fetch("http://localhost:9000/reviews", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(reviewInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                form.reset()
+            })
     }
 
 
