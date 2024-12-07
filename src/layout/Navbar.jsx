@@ -13,7 +13,7 @@ const Navbar = () => {
     const links = <div className="flex gap-5 ">
         <Link to="/">Home</Link>
         <Link to="/add-review">Add Review</Link>
-        <Link to="/watch-list">WatchList</Link>
+        <Link to={`/watch-list/${user?.email}`}>WatchList</Link>
         <Link to="/my-review">My Review</Link>
         <Link to="/all-reviews">All Reviews</Link>
     </div>
