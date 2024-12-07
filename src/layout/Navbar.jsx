@@ -10,11 +10,12 @@ const Navbar = () => {
     const { user, signOutUser } = useContext(AuthContext)
     const navigate = useNavigate()
 
-    const links = <div className="flex gap-5">
+    const links = <div className="flex gap-5 ">
         <Link to="/">Home</Link>
         <Link to="/add-review">Add Review</Link>
         <Link to="/watch-list">WatchList</Link>
         <Link to="/my-review">My Review</Link>
+        <Link to="/all-reviews">All Reviews</Link>
     </div>
 
     const handleLogOut = () => {
@@ -31,8 +32,8 @@ const Navbar = () => {
 
 
     return (
-        <div>
-            <div className="navbar bg-base-100">
+        <div className="">
+            <div className="navbar bg-orange-800 text-white py-5">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -66,7 +67,7 @@ const Navbar = () => {
                     {user && user?.email ?
                         <div className="flex gap-1 md:gap-3 items-center">
                             <img src={user?.photoURL} alt="" className="w-[40px] h-[40px] rounded-full" />
-                            <button className="btn btn-error" onClick={handleLogOut}>Logout</button>
+                            <button className="btn " onClick={handleLogOut}>Logout</button>
                         </div> :
                         <div>
                             <Link to="/login"><a className="btn btn-warning">Login</a></Link>

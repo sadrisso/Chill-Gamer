@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 const MainLayout = () => {
     return (
         <div>
-            <header>
+            <header className="">
                 <Navbar />
             </header>
 
