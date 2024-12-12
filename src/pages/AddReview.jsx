@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../auth/AuthProvider";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 
 const AddReview = () => {
 
-    const { user } = useContext(AuthContext)
 
+    const { user } = useContext(AuthContext)
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -23,17 +24,13 @@ const AddReview = () => {
         const reviewInfo = { image, title, description, rating, year }
 
 
-
-        fetch("http://localhost:9000/reviews", {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(reviewInfo)
+        // using axios
+        axios.post("http://localhost:9000/reviews", reviewInfo)
+        .then((data) => {
+            console.log(data.data);
+            form.reset();
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                form.reset()
-            })
+
     }
 
 

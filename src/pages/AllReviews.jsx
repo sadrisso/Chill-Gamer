@@ -3,8 +3,8 @@ import { Link, useLoaderData } from 'react-router-dom';
 
 const AllReviews = () => {
 
-    const allReviews = useLoaderData()
 
+    const allReviews = useLoaderData()
 
     return (
         <div className='mt-10'>

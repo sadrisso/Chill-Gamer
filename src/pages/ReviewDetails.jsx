@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const ReviewDetails = () => {
 
@@ -15,16 +16,11 @@ const ReviewDetails = () => {
 
         const reviewData = { image, title, description, year, rating, email, name }
 
-        fetch(`http://localhost:9000/watch-list`, {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(reviewData)
+        axios.post("http://localhost:9000/watch-list", reviewData)
+        .then(data => {
+            console.log(data.data)
+            toast.success("Added to WatchList")
         })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                toast.success("Added to WatchList")
-            })
     }
 
     return (

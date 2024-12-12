@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthProvider';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Register = () => {
 
@@ -16,7 +17,15 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        const registerInfo = { name, photo, email, password }
+        const registerInfo = { name, photo, email }
+
+        axios.post("http://localhost:9000/users", registerInfo)
+        .then(data => {
+            console.log(data.data)
+            if (data.data.insertedId) {
+                toast.success("successful")
+            }
+        })
 
         createUser(email, password)
             .then((res) => {

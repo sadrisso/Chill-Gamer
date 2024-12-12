@@ -4,7 +4,6 @@ import { Link, useLoaderData } from 'react-router-dom';
 const WatchList = () => {
 
     const data = useLoaderData()
-    console.log(data)
 
     return (
         <div className='grid grid-cols-1 md:grid-cols-3 gap-3 mt-28'>
