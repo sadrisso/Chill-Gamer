@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllReviews from "../pages/AllReviews";
 import ReviewDetails from "../pages/ReviewDetails";
 import WatchList from "../pages/WatchList";
+import Users from "../pages/Users";
 
 
 export const router = createBrowserRouter([
@@ -36,7 +37,7 @@ export const router = createBrowserRouter([
             {
                 path: "/watch-list/:email",
                 element: <WatchList />,
-                loader: ({params}) => fetch(`http://localhost:9000/watch-list/${params.email}`)
+                loader: ({ params }) => fetch(`http://localhost:9000/watch-list/${params.email}`)
             },
             {
                 path: "/login",
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path: "/users",
+                element: <Users />
             }
         ]
     }
